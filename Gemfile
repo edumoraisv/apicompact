@@ -9,7 +9,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
 gem 'rack-cors'
-gem 'rails', '~> 6.0.3'
+gem 'rails', '~> 6.1.1'
 gem 'tty-spinner'
 
 gem 'active_storage_base64'
@@ -55,5 +55,3 @@ end
 group :production do
   gem 'sentry-raven'
 end
-
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

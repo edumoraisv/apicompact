@@ -28,20 +28,12 @@ class ApplicationController < ActionController::API
   end
 
   def find_or_initilize_user(token)
-    if token.nil?
-      User.new
-    else
-      user_email = firebase_verification(token)
-      User.find_by(email: user_email) || User.new
-    end
-  end
+    firebase_response = HTTParty.post(
+      "https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=#{ENV['FIREBASE_API_KEY']}",
+      headers: { 'Content-Type' => 'application/json' },
+      body: { 'idToken' => token }.to_json
+    )
 
-  def firebase_verification(token)
-    url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=#{ENV['FIREBASE_API_KEY']}"
-    firebase_verification_call = HTTParty.post(url, headers: { 'Content-Type' => 'application/json' }, body: { 'idToken' => token }.to_json)
-
-    return unless firebase_verification_call.response.code == '200'
-
-    firebase_verification_call['users'].first['email']
+    User.find_by(email: firebase_response['users'].first['email'])
   end
 end
