@@ -5,7 +5,7 @@ module Mutations
     class SaveDraft < BaseMutation
       type Types::Questions::Response
 
-      argument :question, Inputs::SaveQuestionInput, required: true
+      argument :question, Inputs::SaveDraftQuestionInput, required: true
 
       def resolve(question:)
         input = question.to_h

@@ -8,8 +8,8 @@ module Inputs
 
   class SaveQuestionInput < Types::BaseInputObject
     argument :id, ID, required: false
-    argument :instruction, String, required: false
-    argument :support, String, required: false
+    argument :instruction, String, required: true
+    argument :support, String, required: true
     argument :body, String, required: true
     argument :alternatives, [Alternative], required: true
     argument :explanation, String, required: true
